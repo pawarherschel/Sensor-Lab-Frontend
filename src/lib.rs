@@ -4,6 +4,10 @@ use stylist::style;
 use stylist::yew::styled_component;
 use yew::prelude::*;
 
+mod components;
+
+use components::arefu::main_title::MainTitle;
+
 #[derive(Clone, PartialEq, Properties, Serialize, Deserialize)]
 pub struct Table<T: PartialEq>
 where
@@ -71,8 +75,13 @@ pub fn hello_world() -> Html {
         log!(string);
     }
 
+    let main_title_loaded = Callback::from(|m: String| {
+        log!("MainTitle loaded", m);
+    });
+
     html! {
         <>
+        <MainTitle on_load={main_title_loaded}/>
             <h1 class={stylesheet}>{ "RustConf Explorer" }</h1>
             <div class={stylesheet_2}>
                 <h3>{"Videos to watch"}</h3>
